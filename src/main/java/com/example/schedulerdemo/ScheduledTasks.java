@@ -21,6 +21,10 @@ public class ScheduledTasks {
     public void scheduleTaskWithFixedRate() {
         logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()) );
     }
+    /*
+    * fixedRate: Sabit belirlenen süre ile, taskın gerçekleşeceği zaman bir önceki taskın başladığı zamandan hesaplanır.
+    *  Yani ‘fixedRate=5000’ dediğimizde önceki task başladıktan sonra 5 saniye içerisinde bu task gerçekleşecek demektir.
+    * */
 
     @Scheduled(fixedDelay = 2000)
     public void scheduleTaskWithFixedDelay() {
@@ -32,6 +36,11 @@ public class ScheduledTasks {
             throw new IllegalStateException(ex);
         }
     }
+    /*
+    * fixedDelay : Sabit gecikme süresi ile, taskımız bir önceki taskın bitiminden sonra belirlediğimiz süre kadar bekler.
+    * Yani ‘fixedDelay=5000’ dediğimizde önceki taskın bitiminden 5 saniye sonra yeni task başlar.
+    *  Tasklar arasında 5 saniye olduğundan emin oluruz.
+    * */
 
     @Scheduled(fixedRate = 2000, initialDelay = 5000)
     public void scheduleTaskWithInitialDelay() {
@@ -43,6 +52,7 @@ public class ScheduledTasks {
         logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
     }
     /*
+    cron: Basit bir cron expression ile işlemlerimizi istediğimiz belli bir periyoda zamanlayabiliriz.
     * Her gün 12:00 (öğlen) :
         0 12 * * ?
     Her gün 13:00'te başlayıp 13:55'te biten ve ardından 18:00'de başlayıp 18:55'te biten beş dakikada bir :
